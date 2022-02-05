@@ -1,5 +1,7 @@
 <script>
 	import games from './games';
+	import { Button } from 'sveltestrap';
+	import Navbar from './Navbar.svelte';
 
 	let currentGameKey;
 </script>
@@ -20,7 +22,7 @@
 	{:else}
 		<div class="container">
 			{#each Object.values(games) as game}
-				<button class="item" on:click={() => currentGameKey = game.key}>{game.label}</button>
+				<Button color="primary" on:click={() => currentGameKey = game.key}>{game.label}</Button>
 			{/each}
 		</div>
 	{/if}
