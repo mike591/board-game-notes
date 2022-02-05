@@ -1,29 +1,19 @@
 <script>
 	import games from './games';
-	import { Button } from 'sveltestrap';
 	import Navbar from './Navbar.svelte';
 
 	let currentGameKey;
 </script>
 
 <main>
-	<div class="header">
-	{#if games[currentGameKey]}
-		<h2>{games[currentGameKey].label}</h2>
-	{:else}
-		<h2>Board Game Notes</h2>
-	{/if}
-		<div class="menu-icon">
-			Menu
-		</div>
-	</div>
+	<Navbar currentGame={games[currentGameKey]} />
 	{#if games[currentGameKey]}
 		<svelte:component this={games[currentGameKey].Component} />
 	{:else}
 		<div class="container">
-			{#each Object.values(games) as game}
-				<Button color="primary" on:click={() => currentGameKey = game.key}>{game.label}</Button>
-			{/each}
+		{#each Object.values(games) as game}
+			<button color="primary" on:click={() => currentGameKey = game.key}>{game.label}</button>
+		{/each}
 		</div>
 	{/if}
 </main>
@@ -37,17 +27,12 @@
 		height: 100%;
 	}
 
-	.header {
-		width: 100%;
-		display: flex;
-		justify-content: space-between;
-		height: 50px;
-		align-items: center;
-	}
-
 	.container {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		width: 100%;
+		flex-grow: 1;
+		padding: 15px;
 	}
 </style>
