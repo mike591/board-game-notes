@@ -1,10 +1,12 @@
 <script>
   import MenuIcon from './assets/MenuIcon.svelte'
+  import games from './games';
 
   let isOpen = false;
   const toggle = () => (isOpen = !isOpen);
 
   export let currentGame;
+  export let setCurrentGameKey;
 </script>
 
 <div class="navbar">
@@ -13,7 +15,12 @@
     <MenuIcon />
   </button>
   {#if isOpen}
-    <div class="menu-popup">Hi</div>
+    <div class="menu-popup">
+    {#each Object.values(games) as game}
+      <button class="menu-item" on:click={() => setCurrentGameKey(game.key)}>{game.label}</button>
+    {/each}
+    <button class="menu-item" on:click={() => setCurrentGameKey()}>Home</button>
+    </div>
     <div class="cancel-overlay" on:click={toggle}></div>
   {/if}
 </div>
@@ -54,5 +61,9 @@
     border: 1px solid rgba(155, 155, 155);
     box-shadow: 0 1px 1px 1px rgb(155 155 155 / 25%);
     z-index: 1;
+  }
+
+  .menu-item {
+    padding: 15px
   }
 </style>

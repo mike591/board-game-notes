@@ -3,16 +3,19 @@
 	import Navbar from './Navbar.svelte';
 
 	let currentGameKey;
+	const setCurrentGameKey = (key) => {
+		currentGameKey = key;
+	}
 </script>
 
 <main>
-	<Navbar currentGame={games[currentGameKey]} />
+	<Navbar setCurrentGameKey={setCurrentGameKey} currentGame={games[currentGameKey]} />
 	{#if games[currentGameKey]}
 		<svelte:component this={games[currentGameKey].Component} />
 	{:else}
 		<div class="container">
 		{#each Object.values(games) as game}
-			<button color="primary" on:click={() => currentGameKey = game.key}>{game.label}</button>
+			<button class='container-item' on:click={() => setCurrentGameKey(game.key)}>{game.label}</button>
 		{/each}
 		</div>
 	{/if}
@@ -34,5 +37,10 @@
 		width: 100%;
 		flex-grow: 1;
 		padding: 15px;
+	}
+
+	.container-item {
+		padding: 15px;
+		width: 75%;
 	}
 </style>
