@@ -17,9 +17,19 @@
   {#if isOpen}
     <div class="menu-popup">
     {#each Object.values(games) as game}
-      <button class="menu-item" on:click={() => setCurrentGameKey(game.key)}>{game.label}</button>
+      <button class="menu-item" on:click={() => {
+        setCurrentGameKey(game.key);
+        toggle();
+      }}>
+        {game.label}
+      </button>
     {/each}
-    <button class="menu-item" on:click={() => setCurrentGameKey()}>Home</button>
+    <button class="menu-item" on:click={() => {
+      setCurrentGameKey();
+      toggle();
+    }}>
+      Home
+    </button>
     </div>
     <div class="cancel-overlay" on:click={toggle}></div>
   {/if}

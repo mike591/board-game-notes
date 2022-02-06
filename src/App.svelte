@@ -2,9 +2,12 @@
 	import games from './games';
 	import Navbar from './Navbar.svelte';
 
-	let currentGameKey;
+	const localStorageKey = 'app';
+	const previousGameKey = localStorage.getItem(localStorageKey);
+	let currentGameKey = previousGameKey;
 	const setCurrentGameKey = (key) => {
 		currentGameKey = key;
+		localStorage.setItem(localStorageKey, currentGameKey);
 	}
 </script>
 
