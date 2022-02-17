@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.a26b529e.css",
-    "main.js": "/static/js/main.5bb65725.js",
+    "main.css": "/static/css/main.4500069e.css",
+    "main.js": "/static/js/main.e58a5700.js",
     "static/media/awkward_guests_tracking_sheet.png": "/static/media/awkward_guests_tracking_sheet.b8fc483aed4213609640.png",
     "index.html": "/index.html",
-    "main.a26b529e.css.map": "/static/css/main.a26b529e.css.map",
-    "main.5bb65725.js.map": "/static/js/main.5bb65725.js.map"
+    "main.4500069e.css.map": "/static/css/main.4500069e.css.map",
+    "main.e58a5700.js.map": "/static/js/main.e58a5700.js.map"
   },
   "entrypoints": [
-    "static/css/main.a26b529e.css",
-    "static/js/main.5bb65725.js"
+    "static/css/main.4500069e.css",
+    "static/js/main.e58a5700.js"
   ]
 }
