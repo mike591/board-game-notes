@@ -1,68 +1,126 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import Button from "@mui/material/Button";
 import UndoIcon from "@mui/icons-material/Undo";
-import RedoIcon from "@mui/icons-material/Redo";
-import CreateIcon from "@mui/icons-material/Create";
-import FormatColorResetIcon from "@mui/icons-material/FormatColorReset";
-
-import "./App.scss";
-import { ReactSketchCanvas } from "react-sketch-canvas";
+import OpenInFullIcon from "@mui/icons-material/OpenInFull";
+import EditIcon from "@mui/icons-material/Edit";
+import CanvasDraw from "react-canvas-draw";
 import awkwardGuestsImg from "assets/awkward_guests_tracking_sheet.png";
+import { CirclePicker } from "react-color";
+import Drawer from "@mui/material/Drawer";
+import "./App.scss";
+import { Fab } from "@mui/material";
 
 const App = () => {
   const canvasRef = useRef();
-  const [isErasing, setIsErasing] = useState(false);
+  const canvasContainerRef = useRef();
+
+  const [dimensions, setDimensions] = useState({});
+  const [color, setColor] = useState("#000000");
+  const [drawerIsOpen, setDrawerIsOpen] = useState(true);
+  const [showFlash, setShowFlash] = useState(true);
+
+  const handleResize = useCallback(() => {
+    const aspectRatio = 1654 / 2339; // (h/w)
+
+    let width = canvasContainerRef.current.offsetWidth;
+    let height = aspectRatio * width;
+
+    while (height >= canvasContainerRef.current.offsetHeight) {
+      width *= 0.99;
+      height *= 0.99;
+    }
+
+    setDimensions({
+      width: width,
+      height: height,
+    });
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
 
   const handleUndo = () => {
     canvasRef.current.undo();
   };
 
-  const handleRedo = () => {
-    canvasRef.current.redo();
+  const handleFullScreen = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      window.document.body.requestFullscreen({ navigationUI: "hide" });
+    }
   };
-
-  const setPencilMode = () => {
-    canvasRef.current.eraseMode(false);
-    setIsErasing(false);
-  };
-
-  const setEraseMode = () => {
-    canvasRef.current.eraseMode(true);
-    setIsErasing(true);
-  };
-
-  window.canvasRef = canvasRef.current;
 
   return (
     <div className="App">
-      <div className="_menu"></div>
-      <div className="_container">
+      <Fab
+        className="drawer-button"
+        color="primary"
+        onClick={() => setDrawerIsOpen(true)}
+      >
+        <EditIcon />
+      </Fab>
+      <Drawer
+        className="_drawer"
+        anchor={"left"}
+        open={drawerIsOpen}
+        onClose={() => {
+          setDrawerIsOpen(false);
+          setShowFlash(false);
+        }}
+      >
         <div className="_controls">
-          <Button variant="outlined" onClick={handleUndo}>
+          <Button
+            className={`__button ${showFlash ? "blink_me" : ""}`}
+            variant="outlined"
+            onClick={handleFullScreen}
+          >
+            <OpenInFullIcon />
+          </Button>
+          <Button className="__button" variant="outlined" onClick={handleUndo}>
             <UndoIcon />
           </Button>
-          <Button variant="outlined" onClick={handleRedo}>
-            <RedoIcon />
-          </Button>
-          <Button
-            variant={isErasing ? "outlined" : "contained"}
-            onClick={setPencilMode}
-          >
-            <CreateIcon />
-          </Button>
-          <Button
-            variant={isErasing ? "contained" : "outlined"}
-            onClick={setEraseMode}
-          >
-            <FormatColorResetIcon />
-          </Button>
+          <CirclePicker
+            onChangeComplete={(color) => {
+              setColor(color.hex);
+            }}
+            colors={[
+              "#f44336",
+              "#e91e63",
+              "#9c27b0",
+              "#673ab7",
+              "#2196f3",
+              "#00bcd4",
+              "#4caf50",
+              "#8bc34a",
+              "#cddc39",
+              "#ffc107",
+              "#ff9800",
+              "#795548",
+              "#607d8b",
+              "#000000",
+            ]}
+            width="auto"
+          />
         </div>
-        <ReactSketchCanvas
+      </Drawer>
+      <div className="_container" ref={canvasContainerRef}>
+        <CanvasDraw
           ref={canvasRef}
-          strokeWidth={1}
-          strokeColor="black"
-          backgroundImage={awkwardGuestsImg}
-          preserveBackgroundImageAspectRatio="xMidYMid meet"
+          enablePanAndZoom
+          imgSrc={awkwardGuestsImg}
+          canvasWidth={dimensions.width}
+          canvasHeight={dimensions.height}
+          brushRadius={0}
+          lazyRadius={0}
+          brushColor={color}
+          hideInterface
+          zoomExtents={{ min: 1, max: 8 }}
         />
       </div>
     </div>
