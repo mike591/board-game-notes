@@ -1,0 +1,10 @@
+export const GARAGE = "Garage";
+export const TROPHY_ROOM = "Trophy room";
+export const BILLIARD_ROOM = "Billiard room";
+export const STUDY_CRIME_SCENE = "Study / Crime scene";
+export const BEDROOM = "Bedroom";
+export const VESTIBULE = "Vestibule";
+export const KITCHEN = "Kitchen";
+export const LIVING_ROOM = "Living room";
+export const SHED = "Shed";
+export const LIBRARY = "Library";

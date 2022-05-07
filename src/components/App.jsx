@@ -1,127 +1,80 @@
-import { useRef, useState, useCallback, useEffect } from "react";
-import Button from "@mui/material/Button";
-import UndoIcon from "@mui/icons-material/Undo";
-import OpenInFullIcon from "@mui/icons-material/OpenInFull";
-import EditIcon from "@mui/icons-material/Edit";
-import CanvasDraw from "react-canvas-draw";
-import awkwardGuestsImg from "assets/awkward_guests_tracking_sheet.png";
-import { CirclePicker } from "react-color";
-import Drawer from "@mui/material/Drawer";
 import "./App.scss";
-import { Fab } from "@mui/material";
+import { Drawer, Button, AppBar, Toolbar } from "@mui/material";
+import mansionImg from "assets/mansion.png";
+import SuspectCards from "components/awkwardGuests/SuspectCards";
+import WeaponCards from "components/awkwardGuests/WeaponCards";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
-  const canvasRef = useRef();
-  const canvasContainerRef = useRef();
+  const [openSuspectsDrawer, setOpenSuspectsDrawer] = useState(false);
+  const [openWeaponsDrawer, setOpenWeaponsDrawer] = useState(false);
+  const [openRoomsDrawer, setOpenRoomsDrawer] = useState(false);
 
-  const [dimensions, setDimensions] = useState({});
-  const [color, setColor] = useState("#000000");
-  const [drawerIsOpen, setDrawerIsOpen] = useState(true);
-  const [showFlash, setShowFlash] = useState(true);
+  const dispatch = useDispatch();
 
-  const handleResize = useCallback(() => {
-    const aspectRatio = 1654 / 2339; // (h/w)
+  const awkwardGuestsState = useSelector((state) => state.awkwardGuests);
 
-    let width = canvasContainerRef.current.offsetWidth;
-    let height = aspectRatio * width;
-
-    while (height >= canvasContainerRef.current.offsetHeight) {
-      width *= 0.99;
-      height *= 0.99;
-    }
-
-    setDimensions({
-      width: width,
-      height: height,
-    });
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [handleResize]);
-
-  const handleUndo = () => {
-    canvasRef.current.undo();
-  };
-
-  const handleFullScreen = () => {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else {
-      window.document.body.requestFullscreen({ navigationUI: "hide" });
-    }
-  };
+  console.log({ awkwardGuestsState });
 
   return (
     <div className="App">
-      <Fab
-        className="drawer-button"
-        color="primary"
-        onClick={() => setDrawerIsOpen(true)}
-      >
-        <EditIcon />
-      </Fab>
       <Drawer
-        className="_drawer"
         anchor={"left"}
-        open={drawerIsOpen}
-        onClose={() => {
-          setDrawerIsOpen(false);
-          setShowFlash(false);
-        }}
+        open={openSuspectsDrawer}
+        onClose={() => setOpenSuspectsDrawer(false)}
       >
-        <div className="_controls">
-          <Button
-            className={`__button ${showFlash ? "blink_me" : ""}`}
-            variant="outlined"
-            onClick={handleFullScreen}
-          >
-            <OpenInFullIcon />
-          </Button>
-          <Button className="__button" variant="outlined" onClick={handleUndo}>
-            <UndoIcon />
-          </Button>
-          <CirclePicker
-            onChangeComplete={(color) => {
-              setColor(color.hex);
-            }}
-            colors={[
-              "#f44336",
-              "#e91e63",
-              "#9c27b0",
-              "#673ab7",
-              "#2196f3",
-              "#00bcd4",
-              "#4caf50",
-              "#8bc34a",
-              "#cddc39",
-              "#ffc107",
-              "#ff9800",
-              "#795548",
-              "#607d8b",
-              "#000000",
-            ]}
-            width="auto"
-          />
+        <div className="drawer__content">
+          <SuspectCards />
         </div>
       </Drawer>
-      <div className="_container" ref={canvasContainerRef}>
-        <CanvasDraw
-          ref={canvasRef}
-          enablePanAndZoom
-          imgSrc={awkwardGuestsImg}
-          canvasWidth={dimensions.width}
-          canvasHeight={dimensions.height}
-          brushRadius={0}
-          lazyRadius={0}
-          brushColor={color}
-          hideInterface
-          zoomExtents={{ min: 1, max: 8 }}
-        />
+      <Drawer
+        anchor={"left"}
+        open={openWeaponsDrawer}
+        onClose={() => setOpenWeaponsDrawer(false)}
+      >
+        <div className="drawer__content">
+          <WeaponCards />
+        </div>
+      </Drawer>
+      <Drawer
+        anchor={"left"}
+        open={openRoomsDrawer}
+        onClose={() => setOpenRoomsDrawer(false)}
+      >
+        Rooms!
+      </Drawer>
+
+      <AppBar position="relative">
+        <Toolbar>
+          <Button
+            sx={{ my: 2, color: "white", display: "block" }}
+            onClick={() => setOpenSuspectsDrawer(true)}
+          >
+            Suspects
+          </Button>
+          <Button
+            sx={{ my: 2, color: "white", display: "block" }}
+            onClick={() => setOpenWeaponsDrawer(true)}
+          >
+            Weapons
+          </Button>
+          <Button
+            sx={{ my: 2, color: "white", display: "block" }}
+            onClick={() => setOpenRoomsDrawer(true)}
+          >
+            Rooms
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <div className="board">
+        <div className="board__content">
+          <img
+            className="board__content__image"
+            src={mansionImg}
+            alt="mansion"
+          />
+        </div>
       </div>
     </div>
   );
