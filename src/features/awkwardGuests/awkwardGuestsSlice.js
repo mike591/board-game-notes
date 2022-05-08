@@ -32,46 +32,56 @@ export const awkwardGuestsSlice = createSlice({
       [locations.garage.key]: {
         notes: "",
         blocked: [],
+        guests: [],
       },
       [locations.trophyRoom.key]: {
         notes: "",
         blocked: [],
+        guests: [],
       },
       [locations.billiardRoom.key]: {
         notes: "",
         blocked: [],
-        guestNum: undefined,
+        guestCount: undefined,
+        guests: [],
       },
       [locations.studyCrimeScene.key]: {
         notes: "",
         blocked: [],
+        guests: [],
       },
       [locations.bedroom.key]: {
         notes: "",
         blocked: [],
+        guests: [],
       },
       [locations.vestibule.key]: {
         notes: "",
         blocked: [],
-        guestNum: undefined,
+        guestCount: undefined,
+        guests: [],
       },
       [locations.kitchen.key]: {
         notes: "",
         blocked: [],
+        guests: [],
       },
       [locations.livingRoom.key]: {
         notes: "",
         blocked: [],
-        guestNum: undefined,
+        guestCount: undefined,
+        guests: [],
       },
       [locations.shed.key]: {
         notes: "",
         blocked: [],
+        guests: [],
       },
       [locations.library.key]: {
         notes: "",
         blocked: [],
-        guestNum: undefined,
+        guestCount: undefined,
+        guests: [],
       },
     },
     suspects: {
@@ -148,11 +158,15 @@ export const awkwardGuestsSlice = createSlice({
       const { key, value } = action.payload;
       state.weapons[key] = value;
     },
+    updateLocations: (state, action) => {
+      const { locationKey, key, value } = action.payload;
+      state.locations[locationKey][key] = value;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { loadState, updateSuspects, updateWeapons } =
+export const { loadState, updateSuspects, updateWeapons, updateLocations } =
   awkwardGuestsSlice.actions;
 
 export default awkwardGuestsSlice.reducer;

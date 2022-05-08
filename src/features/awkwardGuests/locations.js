@@ -35,6 +35,7 @@ const locations = {
     label: locationLabels.BILLIARD_ROOM,
     weapons: [weaponLabels.CUE],
     connectedTo: [locationLabels.TROPHY_ROOM, locationLabels.VESTIBULE],
+    isStarting: true,
   },
   studyCrimeScene: {
     key: "studyCrimeScene",
@@ -66,6 +67,7 @@ const locations = {
       locationLabels.TROPHY_ROOM,
       locationLabels.LIVING_ROOM,
     ],
+    isStarting: true,
   },
   kitchen: {
     key: "kitchen",
@@ -90,6 +92,7 @@ const locations = {
       locationLabels.LIBRARY,
       locationLabels.KITCHEN,
     ],
+    isStarting: true,
   },
   shed: {
     key: "shed",
@@ -106,6 +109,7 @@ const locations = {
     label: locationLabels.LIBRARY,
     weapons: [weaponLabels.CURTAIN_CORD],
     connectedTo: [locationLabels.LIVING_ROOM, locationLabels.SHED],
+    isStarting: true,
   },
 };
 

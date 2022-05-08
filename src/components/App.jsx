@@ -1,6 +1,7 @@
 import "./App.scss";
 import { Drawer, Button, AppBar, Toolbar } from "@mui/material";
 import mansionImg from "assets/mansion.png";
+import LocationCards from "components/awkwardGuests/LocationCards";
 import SuspectCards from "components/awkwardGuests/SuspectCards";
 import WeaponCards from "components/awkwardGuests/WeaponCards";
 import { useState } from "react";
@@ -9,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 const App = () => {
   const [openSuspectsDrawer, setOpenSuspectsDrawer] = useState(false);
   const [openWeaponsDrawer, setOpenWeaponsDrawer] = useState(false);
-  const [openRoomsDrawer, setOpenRoomsDrawer] = useState(false);
+  const [openLocationsDrawer, setOpenLocationsDrawer] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -39,10 +40,12 @@ const App = () => {
       </Drawer>
       <Drawer
         anchor={"left"}
-        open={openRoomsDrawer}
-        onClose={() => setOpenRoomsDrawer(false)}
+        open={openLocationsDrawer}
+        onClose={() => setOpenLocationsDrawer(false)}
       >
-        Rooms!
+        <div className="drawer__content">
+          <LocationCards />
+        </div>
       </Drawer>
 
       <AppBar position="relative">
@@ -61,9 +64,9 @@ const App = () => {
           </Button>
           <Button
             sx={{ my: 2, color: "white", display: "block" }}
-            onClick={() => setOpenRoomsDrawer(true)}
+            onClick={() => setOpenLocationsDrawer(true)}
           >
-            Rooms
+            Locations
           </Button>
         </Toolbar>
       </AppBar>
