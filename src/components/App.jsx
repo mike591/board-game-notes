@@ -2,6 +2,7 @@ import "./App.scss";
 import { Drawer, Button, AppBar, Toolbar } from "@mui/material";
 import mansionImg from "assets/mansion.png";
 import LocationCards from "components/awkwardGuests/LocationCards";
+import Overlay from "components/awkwardGuests/Overlay";
 import SuspectCards from "components/awkwardGuests/SuspectCards";
 import WeaponCards from "components/awkwardGuests/WeaponCards";
 import { useState } from "react";
@@ -72,6 +73,7 @@ const App = () => {
       </AppBar>
       <div className="board">
         <div className="board__content">
+          <Overlay />
           <img
             className="board__content__image"
             src={mansionImg}

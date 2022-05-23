@@ -69,36 +69,43 @@ const LocationCards = () => {
               <FormControl fullWidth>
                 <InputLabel>Count</InputLabel>
                 <Select
-                  defaultValue={""}
-                  value={awkwardGuestsState.locations[location.key].guestCount}
+                  value={
+                    awkwardGuestsState.locations[location.key].guestCount || ""
+                  }
                   onChange={(event) => {
                     dispatch(
                       updateLocations({
                         locationKey: location.key,
                         key: "guestCount",
-                        value: event.target.value,
+                        value:
+                          event.target.value === 0 ? null : event.target.value,
                       })
                     );
                   }}
                   input={<OutlinedInput label="Count" />}
                 >
-                  {[1, 2, 3, 4, 5, 6].map((num) => (
-                    <MenuItem key={num} value={num}>
-                      {num}
-                    </MenuItem>
-                  ))}
+                  {[0, 1, 2, 3, 4, 5, 6].map((num) => {
+                    const currentVal =
+                      awkwardGuestsState.locations[location.key].guestCount;
+                    if (!currentVal && num === 0) {
+                      return undefined;
+                    } else {
+                      return (
+                        <MenuItem key={num} value={num}>
+                          {num}
+                        </MenuItem>
+                      );
+                    }
+                  })}
                 </Select>
               </FormControl>
             </Grid>
           )}
-          {location.connectedTo.map((connectedToLabel) => {
-            const isBlocked =
-              awkwardGuestsState.locations[location.key].blocked.includes(
-                connectedToLabel
-              );
-
+          {Object.entries(
+            awkwardGuestsState.locations[location.key].blocked
+          ).map(([blockedRoomKey, isBlocked]) => {
             return (
-              <Fragment key={connectedToLabel}>
+              <Fragment key={blockedRoomKey}>
                 <Grid item xs={1}>
                   <FormControlLabel
                     control={
@@ -110,19 +117,11 @@ const LocationCards = () => {
                             updateLocations({
                               locationKey: location.key,
                               key: "blocked",
-                              value: isBlocked
-                                ? awkwardGuestsState.locations[
-                                    location.key
-                                  ].blocked.filter(
-                                    (locationLabel) =>
-                                      locationLabel !== connectedToLabel
-                                  )
-                                : [
-                                    ...awkwardGuestsState.locations[
-                                      location.key
-                                    ].blocked,
-                                    connectedToLabel,
-                                  ],
+                              value: {
+                                ...awkwardGuestsState.locations[location.key]
+                                  .blocked,
+                                [blockedRoomKey]: !isBlocked,
+                              },
                             })
                           );
                         }}
@@ -139,7 +138,7 @@ const LocationCards = () => {
                   {isBlocked && <CloseIcon sx={{ color: "red" }} />}
                 </Grid>
                 <Grid item xs={4}>
-                  <Typography>{connectedToLabel}</Typography>
+                  <Typography>{locations[blockedRoomKey].label}</Typography>
                 </Grid>
               </Fragment>
             );

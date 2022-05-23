@@ -69,19 +69,19 @@ const WeaponCards = () => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
-                                      checked={value === 1}
-                                      indeterminate={value === 2}
+                                      checked={false}
+                                      indeterminate={value}
                                       onChange={() => {
                                         dispatch(
                                           updateWeapons({
                                             key: weapon.key,
-                                            value: (value + 1) % 3,
+                                            value: !value,
                                           })
                                         );
                                       }}
                                     />
                                   }
-                                  label="Is weapon?"
+                                  label="Not weapon?"
                                 />
                               </Grid>
                             </Grid>
