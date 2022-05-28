@@ -34,6 +34,26 @@
     position: absolute;
   }
 
+  .guests {
+    font-size: 0.75rem;
+    color: purple;
+    position: absolute;
+  }
+
+  .notes {
+    position: absolute;
+  }
+
+  .garage.guests {
+    top: 25%;
+    left: 14%;
+  }
+
+  .garage.notes {
+    top: 22%;
+    left: 22%;
+  }
+
   .garage-to-trophyRoom.blocked {
     top: 44%;
     left: 23%;
@@ -64,6 +84,16 @@
     top: 37%;
     left: 12%;
     width: 3.5rem;
+  }
+
+  .trophyRoom.guests {
+    top: 42%;
+    left: 9%;
+  }
+
+  .trophyRoom.notes {
+    top: 45%;
+    left: 6%;
   }
 
   .trophyRoom-to-garage {
@@ -97,6 +127,16 @@
     width: 3.5rem;
   }
 
+  .billiardRoom.guests {
+    top: 72%;
+    left: 20%;
+  }
+
+  .billiardRoom.notes {
+    top: 72%;
+    left: 12%;
+  }
+
   .billiardRoom.count {
     top: 77.5%;
     left: 25.75%;
@@ -115,6 +155,16 @@
   .cue {
     top: 79.5%;
     left: 12%;
+  }
+
+  .bedroom.guests {
+    top: 52%;
+    left: 37%;
+  }
+
+  .bedroom.notes {
+    top: 52%;
+    left: 46%;
   }
 
   .bedroom-to-garage.blocked {
@@ -154,6 +204,16 @@
     width: 4rem;
   }
 
+  .vestibule.guests {
+    top: 74%;
+    left: 43%;
+  }
+
+  .vestibule.notes {
+    top: 67%;
+    left: 38%;
+  }
+
   .vestibule.count {
     top: 77.5%;
     left: 52.25%;
@@ -177,6 +237,26 @@
   .saber {
     top: 79%;
     left: 42%;
+  }
+
+  .studyCrimeScene.guests {
+    top: 19%;
+    left: 59%;
+  }
+
+  .studyCrimeScene.notes {
+    top: 17%;
+    left: 50%;
+  }
+
+  .kitchen.guests {
+    top: 40%;
+    left: 63%;
+  }
+
+  .kitchen.notes {
+    top: 42%;
+    left: 63%;
   }
 
   .kitchen-to-bedroom.blocked {
@@ -211,6 +291,16 @@
     width: 2.5rem;
   }
 
+  .livingRoom.guests {
+    top: 70%;
+    left: 64%;
+  }
+
+  .livingRoom.notes {
+    top: 61%;
+    left: 64%;
+  }
+
   .livingRoom.count {
     top: 77.5%;
     left: 73.5%;
@@ -235,6 +325,16 @@
     top: 79%;
     left: 60%;
     width: 3rem;
+  }
+
+  .shed.guests {
+    top: 22%;
+    left: 82%;
+  }
+
+  .shed.notes {
+    top: 25%;
+    left: 84%;
   }
 
   .shed-to-studyCrimeScene.blocked {
@@ -266,6 +366,16 @@
   .rope {
     top: 27.5%;
     left: 91%;
+  }
+
+  .library.guests {
+    top: 70%;
+    left: 80%;
+  }
+
+  .library.notes {
+    top: 65%;
+    left: 89%;
   }
 
   .library.count {

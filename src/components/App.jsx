@@ -1,23 +1,54 @@
 import "./App.scss";
-import { Drawer, Button, AppBar, Toolbar } from "@mui/material";
+import NotesIcon from "@mui/icons-material/Notes";
+import { Drawer, Button, Fab } from "@mui/material";
 import mansionImg from "assets/mansion.png";
 import LocationCards from "components/awkwardGuests/LocationCards";
 import Overlay from "components/awkwardGuests/Overlay";
 import SuspectCards from "components/awkwardGuests/SuspectCards";
 import WeaponCards from "components/awkwardGuests/WeaponCards";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import {
+  loadState,
+  resetState,
+} from "features/awkwardGuests/awkwardGuestsSlice";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const App = () => {
   const [openSuspectsDrawer, setOpenSuspectsDrawer] = useState(false);
   const [openWeaponsDrawer, setOpenWeaponsDrawer] = useState(false);
   const [openLocationsDrawer, setOpenLocationsDrawer] = useState(false);
+  const [openNoteSelectionDrawer, setOpenNoteSelectionDrawer] = useState(false);
+  const [stateLoaded, setStateLoaded] = useState(false);
 
   const dispatch = useDispatch();
 
-  const awkwardGuestsState = useSelector((state) => state.awkwardGuests);
+  const handleClearStorage = () => {
+    dispatch(resetState());
+  };
 
-  console.log({ awkwardGuestsState });
+  const toggleFullScreen = () => {
+    if (!window.document.fullscreenElement) {
+      window.document.documentElement.requestFullscreen();
+    } else {
+      if (window.document.exitFullscreen) {
+        window.document.exitFullscreen();
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (!stateLoaded) {
+      const stateString = window.localStorage.getItem("state");
+      if (stateString) {
+        dispatch(loadState({ state: JSON.parse(stateString) }));
+      }
+      setStateLoaded(true);
+    }
+  }, [dispatch, stateLoaded]);
+
+  useEffect(() => {
+    localStorage.setItem("myCat", "Tom");
+  }, []);
 
   return (
     <div className="App">
@@ -48,29 +79,51 @@ const App = () => {
           <LocationCards />
         </div>
       </Drawer>
-
-      <AppBar position="relative">
-        <Toolbar>
+      <Drawer
+        anchor={"left"}
+        open={openNoteSelectionDrawer}
+        onClose={() => setOpenNoteSelectionDrawer(false)}
+      >
+        <div className="drawer__content">
           <Button
-            sx={{ my: 2, color: "white", display: "block" }}
+            sx={{ my: 2, p: 4, width: "100%" }}
             onClick={() => setOpenSuspectsDrawer(true)}
           >
             Suspects
           </Button>
           <Button
-            sx={{ my: 2, color: "white", display: "block" }}
+            sx={{ my: 2, p: 4, width: "100%" }}
             onClick={() => setOpenWeaponsDrawer(true)}
           >
             Weapons
           </Button>
           <Button
-            sx={{ my: 2, color: "white", display: "block" }}
+            sx={{ my: 2, p: 4, width: "100%" }}
             onClick={() => setOpenLocationsDrawer(true)}
           >
             Locations
           </Button>
-        </Toolbar>
-      </AppBar>
+          <Button
+            sx={{ my: 2, p: 4, width: "100%" }}
+            onClick={handleClearStorage}
+          >
+            Clear storage
+          </Button>
+          <Button
+            sx={{ my: 2, p: 4, width: "100%" }}
+            onClick={toggleFullScreen}
+          >
+            Toggle fullscreen
+          </Button>
+        </div>
+      </Drawer>
+      <Fab
+        color="primary"
+        sx={{ position: "absolute", zIndex: 10, m: 2 }}
+        onClick={() => setOpenNoteSelectionDrawer(true)}
+      >
+        <NotesIcon />
+      </Fab>
       <div className="board">
         <div className="board__content">
           <Overlay />

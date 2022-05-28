@@ -1,207 +1,224 @@
 import { createSlice } from "@reduxjs/toolkit";
-import locationLabels from "features/awkwardGuests/locationLabels";
 import locations from "features/awkwardGuests/locations";
 import suspects from "features/awkwardGuests/suspects";
 import weapons from "features/awkwardGuests/weapons";
 
-export const awkwardGuestsSlice = createSlice({
-  name: "counter",
-  initialState: {
-    weapons: {
-      [weapons.wrench.key]: true, // false,
-      [weapons.fryingPan.key]: true, // false,
-      [weapons.shovel.key]: true, // false,
-      [weapons.cue.key]: true, // false,
-      [weapons.shotgun.key]: true, // false,
-      [weapons.derringerGun.key]: true, // false,
-      [weapons.revolver.key]: true, // false,
-      [weapons.blunderbuss.key]: true, // false,
-      [weapons.kitchenKnife.key]: true, // false,
-      [weapons.letterOpener.key]: true, // false,
-      [weapons.machete.key]: true, // false,
-      [weapons.saber.key]: true, // false,
-      [weapons.antifreeze.key]: true, // false,
-      [weapons.ratPoison.key]: true, // false,
-      [weapons.pesticide.key]: true, // false,
-      [weapons.poisonousPlant.key]: true, // false,
-      [weapons.leatherStrap.key]: true, // false,
-      [weapons.pillow.key]: true, // false,
-      [weapons.rope.key]: true, // false,
-      [weapons.curtainCord.key]: true, // false,
+const initialState = {
+  weapons: {
+    [weapons.wrench.key]: false,
+    [weapons.fryingPan.key]: false,
+    [weapons.shovel.key]: false,
+    [weapons.cue.key]: false,
+    [weapons.shotgun.key]: false,
+    [weapons.derringerGun.key]: false,
+    [weapons.revolver.key]: false,
+    [weapons.blunderbuss.key]: false,
+    [weapons.kitchenKnife.key]: false,
+    [weapons.letterOpener.key]: false,
+    [weapons.machete.key]: false,
+    [weapons.saber.key]: false,
+    [weapons.antifreeze.key]: false,
+    [weapons.ratPoison.key]: false,
+    [weapons.pesticide.key]: false,
+    [weapons.poisonousPlant.key]: false,
+    [weapons.leatherStrap.key]: false,
+    [weapons.pillow.key]: false,
+    [weapons.rope.key]: false,
+    [weapons.curtainCord.key]: false,
+  },
+  locations: {
+    [locations.garage.key]: {
+      notes: "",
+      blocked: {
+        [locations.trophyRoom.key]: false,
+        [locations.bedroom.key]: false,
+        [locations.studyCrimeScene.key]: false,
+      },
+      guests: [],
     },
-    locations: {
-      [locations.garage.key]: {
-        notes: "",
-        blocked: {
-          [locations.trophyRoom.key]: true, // false,
-          [locations.bedroom.key]: true, // false,
-          [locations.studyCrimeScene.key]: true, // false,
-        },
-        guests: [],
+    [locations.trophyRoom.key]: {
+      notes: "",
+      blocked: {
+        [locations.garage.key]: false,
+        [locations.vestibule.key]: false,
+        [locations.billiardRoom.key]: false,
       },
-      [locations.trophyRoom.key]: {
-        notes: "",
-        blocked: {
-          [locations.garage.key]: true, // false,
-          [locations.vestibule.key]: true, // false,
-          [locations.billiardRoom.key]: true, // false,
-        },
-        guests: [],
-      },
-      [locations.billiardRoom.key]: {
-        notes: "",
-        blocked: {
-          [locations.trophyRoom.key]: true, // false,
-          [locations.vestibule.key]: true, // false,
-        },
-        guestCount: 5,
-        guests: [],
-      },
-      [locations.studyCrimeScene.key]: {
-        notes: "",
-        blocked: {},
-        guests: [],
-      },
-      [locations.bedroom.key]: {
-        notes: "",
-        blocked: {
-          [locations.garage.key]: true, // false,
-          [locations.kitchen.key]: true, // false,
-          [locations.studyCrimeScene.key]: true, // false,
-        },
-        guests: [],
-      },
-      [locations.vestibule.key]: {
-        notes: "",
-        blocked: {
-          [locations.billiardRoom.key]: true, // false,
-          [locations.trophyRoom.key]: true, // false,
-          [locations.livingRoom.key]: true, // false,
-        },
-        guestCount: 5,
-        guests: [],
-      },
-      [locations.kitchen.key]: {
-        notes: "",
-        blocked: {
-          [locations.bedroom.key]: true, // false,
-          [locations.shed.key]: true, // false,
-          [locations.livingRoom.key]: true, // false,
-        },
-        guests: [],
-      },
-      [locations.livingRoom.key]: {
-        notes: "",
-        blocked: {
-          [locations.vestibule.key]: true, // false,
-          [locations.library.key]: true, // false,
-          [locations.kitchen.key]: true, // false,
-        },
-        guestCount: 5,
-        guests: [],
-      },
-      [locations.shed.key]: {
-        notes: "",
-        blocked: {
-          [locations.studyCrimeScene.key]: true, // false,
-          [locations.kitchen.key]: true, // false,
-          [locations.library.key]: true, // false,
-        },
-        guests: [],
-      },
-      [locations.library.key]: {
-        notes: "",
-        blocked: {
-          [locations.livingRoom.key]: true, // false,
-          [locations.shed.key]: true, // false,
-        },
-        guestCount: 5,
-        guests: [],
-      },
+      guests: [],
     },
-    suspects: {
-      [suspects.a.key]: {
-        notes: "",
-        motives: [
-          [0, 0, 0],
-          [0, 0, 0],
-          [0, 0, 0],
-        ],
+    [locations.billiardRoom.key]: {
+      notes: "",
+      blocked: {
+        [locations.trophyRoom.key]: false,
+        [locations.vestibule.key]: false,
       },
-      [suspects.b.key]: {
-        notes: "",
-        motives: [
-          [0, 0, 0],
-          [0, 0, 0],
-          [0, 0, 0],
-        ],
-      },
-      [suspects.c.key]: {
-        notes: "",
-        motives: [
-          [0, 0, 0],
-          [0, 0, 0],
-          [0, 0, 0],
-        ],
-      },
-      [suspects.g.key]: {
-        notes: "",
-        motives: [
-          [0, 0, 0],
-          [0, 0, 0],
-          [0, 0, 0],
-        ],
-      },
-      [suspects.m.key]: {
-        notes: "",
-        motives: [
-          [0, 0, 0],
-          [0, 0, 0],
-          [0, 0, 0],
-        ],
-      },
-      [suspects.s.key]: {
-        notes: "",
-        motives: [
-          [0, 0, 0],
-          [0, 0, 0],
-          [0, 0, 0],
-        ],
-      },
+      guestCount: 0,
+      guests: [],
     },
-    solution: {
-      who: "",
-      why: "",
-      how: "",
-      hasAccomplice: "",
-      accompliceWho: "",
-      accompliceWhy: "",
+    [locations.studyCrimeScene.key]: {
+      notes: "",
+      blocked: {},
+      guests: [],
+    },
+    [locations.bedroom.key]: {
+      notes: "",
+      blocked: {
+        [locations.garage.key]: false,
+        [locations.kitchen.key]: false,
+        [locations.studyCrimeScene.key]: false,
+      },
+      guests: [],
+    },
+    [locations.vestibule.key]: {
+      notes: "",
+      blocked: {
+        [locations.billiardRoom.key]: false,
+        [locations.trophyRoom.key]: false,
+        [locations.livingRoom.key]: false,
+      },
+      guestCount: 0,
+      guests: [],
+    },
+    [locations.kitchen.key]: {
+      notes: "",
+      blocked: {
+        [locations.bedroom.key]: false,
+        [locations.shed.key]: false,
+        [locations.livingRoom.key]: false,
+      },
+      guests: [],
+    },
+    [locations.livingRoom.key]: {
+      notes: "",
+      blocked: {
+        [locations.vestibule.key]: false,
+        [locations.library.key]: false,
+        [locations.kitchen.key]: false,
+      },
+      guestCount: 0,
+      guests: [],
+    },
+    [locations.shed.key]: {
+      notes: "",
+      blocked: {
+        [locations.studyCrimeScene.key]: false,
+        [locations.kitchen.key]: false,
+        [locations.library.key]: false,
+      },
+      guests: [],
+    },
+    [locations.library.key]: {
+      notes: "",
+      blocked: {
+        [locations.livingRoom.key]: false,
+        [locations.shed.key]: false,
+      },
+      guestCount: 0,
+      guests: [],
     },
   },
+  suspects: {
+    [suspects.a.key]: {
+      notes: "",
+      motives: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+    },
+    [suspects.b.key]: {
+      notes: "",
+      motives: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+    },
+    [suspects.c.key]: {
+      notes: "",
+      motives: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+    },
+    [suspects.g.key]: {
+      notes: "",
+      motives: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+    },
+    [suspects.m.key]: {
+      notes: "",
+      motives: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+    },
+    [suspects.s.key]: {
+      notes: "",
+      motives: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+    },
+  },
+  solution: {
+    who: "",
+    why: "",
+    how: "",
+    hasAccomplice: "",
+    accompliceWho: "",
+    accompliceWhy: "",
+  },
+};
+
+export const awkwardGuestsSlice = createSlice({
+  name: "counter",
+  initialState,
   reducers: {
     loadState: (state, action) => {
-      state.weapons = action.weapons;
-      state.locations = action.locations;
-      state.suspects = action.suspects;
-      state.solution = action.solution;
+      const { weapons, locations, suspects, solution } = action.payload.state;
+      state.weapons = weapons;
+      state.locations = locations;
+      state.suspects = suspects;
+      state.solution = solution;
     },
     updateSuspects: (state, action) => {
       const { key, motiveIdx, proofIdx, value } = action.payload;
       state.suspects[key].motives[motiveIdx][proofIdx] = value;
+      window.localStorage.setItem("state", JSON.stringify(state));
     },
     updateWeapons: (state, action) => {
       const { key, value } = action.payload;
       state.weapons[key] = value;
+      window.localStorage.setItem("state", JSON.stringify(state));
     },
     updateLocations: (state, action) => {
       const { locationKey, key, value } = action.payload;
       state.locations[locationKey][key] = value;
+      window.localStorage.setItem("state", JSON.stringify(state));
+    },
+    resetState: (state) => {
+      window.localStorage.removeItem("state");
+      state.weapons = { ...initialState.weapons };
+      state.locations = { ...initialState.locations };
+      state.suspects = { ...initialState.suspects };
+      state.solution = { ...initialState.solution };
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { loadState, updateSuspects, updateWeapons, updateLocations } =
-  awkwardGuestsSlice.actions;
+export const {
+  loadState,
+  resetState,
+  updateSuspects,
+  updateWeapons,
+  updateLocations,
+} = awkwardGuestsSlice.actions;
 
 export default awkwardGuestsSlice.reducer;

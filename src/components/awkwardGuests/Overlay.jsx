@@ -1,6 +1,7 @@
 import "./Overlay.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import classNames from "classnames";
+import InfoPopup from "components/awkwardGuests/InfoPopup";
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 
@@ -18,10 +19,21 @@ const Overlay = () => {
       {Object.entries(locationsState).map(
         ([locationKey, { blocked, guests, guestCount, notes }]) => (
           <Fragment key={locationKey}>
-            {guestCount && (
+            {guestCount > 0 && (
               <div className={classNames(locationKey, "count")}>
                 {guestCount}
               </div>
+            )}
+            {guests.length > 0 && (
+              <div className={classNames(locationKey, "guests")}>
+                {guests.map((g) => g[0]).join(",")}
+              </div>
+            )}
+            {notes.length > 0 && (
+              <InfoPopup
+                className={classNames(locationKey, "notes")}
+                info={notes}
+              />
             )}
             {Object.entries(blocked).map(
               ([blockedRoomKey, isBlocked]) =>
