@@ -26,7 +26,7 @@ const LocationCards = () => {
 
   return (
     <Grid container spacing={3} sx={{ p: 2 }} alignItems="center">
-      {Object.values(locations).map((location) => (
+      {Object.values(locations).sort((a, b) => a.key > b.key ? 1 : -1).map((location) => (
         <Fragment key={location.key}>
           <Grid item xs={12}>
             <Typography variant="h5">{location.label}</Typography>
