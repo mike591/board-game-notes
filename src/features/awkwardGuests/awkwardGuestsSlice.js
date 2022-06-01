@@ -192,6 +192,11 @@ export const awkwardGuestsSlice = createSlice({
       state.suspects[key].motives[motiveIdx][proofIdx] = value;
       window.localStorage.setItem("state", JSON.stringify(state));
     },
+    updateSuspectsNotes: (state, action) => {
+      const { key, value } = action.payload;
+      state.suspects[key].notes = value;
+      window.localStorage.setItem("state", JSON.stringify(state));
+    },
     updateWeapons: (state, action) => {
       const { key, value } = action.payload;
       state.weapons[key] = value;
@@ -217,6 +222,7 @@ export const {
   loadState,
   resetState,
   updateSuspects,
+  updateSuspectsNotes,
   updateWeapons,
   updateLocations,
 } = awkwardGuestsSlice.actions;
