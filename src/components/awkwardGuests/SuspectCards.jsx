@@ -1,4 +1,5 @@
 import CheckIcon from "@mui/icons-material/Check";
+import TextareaAutosize from "@mui/base/TextareaAutosize";
 import {
   Divider,
   Typography,
@@ -10,7 +11,7 @@ import {
   FormLabel,
   Checkbox,
 } from "@mui/material";
-import { updateSuspects } from "features/awkwardGuests/awkwardGuestsSlice";
+import { updateSuspects, updateSuspectsNotes } from "features/awkwardGuests/awkwardGuestsSlice";
 import suspects from "features/awkwardGuests/suspects";
 import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -85,6 +86,20 @@ const SuspectCards = () => {
                     </FormControl>
                   );
                 })}
+                <TextareaAutosize
+                  placeholder="notes..."
+                  style={{ width: "100%", marginTop: '8px'}}
+                  minRows={3}
+                  defaultValue={awkwardGuestsState.suspects[suspect.key].notes}
+                  onBlur={(event) => {
+                    dispatch(
+                      updateSuspectsNotes({
+                        key: suspect.key,
+                        value: event.target.value,
+                      })
+                    );
+                  }}
+                />
               </CardContent>
             </Card>
             <Divider />
