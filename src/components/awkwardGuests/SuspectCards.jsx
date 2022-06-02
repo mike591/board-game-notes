@@ -1,4 +1,5 @@
 import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from '@mui/icons-material/Close';
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 import {
   Divider,
@@ -40,6 +41,9 @@ const SuspectCards = () => {
                   const isMotive = awkwardGuestsState.suspects[
                     suspect.key
                   ].motives[motiveIdx].every((proof) => proof === 1);
+                  const notMotive = awkwardGuestsState.suspects[
+                    suspect.key
+                  ].motives[motiveIdx].includes(2);
                   return (
                     <FormControl key={motive.label}>
                       <FormLabel className="image-label-header">
@@ -50,6 +54,7 @@ const SuspectCards = () => {
                         />
                         <Typography>{motive.label}</Typography>
                         {isMotive && <CheckIcon />}
+                        {notMotive && <CloseIcon color="warning"/>}
                       </FormLabel>
                       <FormGroup className="proof-group">
                         {motive.proof.map((proof, proofIdx) => {
