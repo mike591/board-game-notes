@@ -30,6 +30,7 @@ const WeaponCards = () => {
   return (
     <Grid container spacing={5} sx={{ p: 2 }}>
       {Object.entries(weaponsGroupedByCategory).map(([category, weapons]) => {
+        const toggleAll = weapons.every((weapon) => awkwardGuestsState.weapons[weapon.key]);
         return (
           <Fragment key={category}>
             <Grid item xs={12}>
@@ -37,6 +38,26 @@ const WeaponCards = () => {
                 <Typography variant="h5" sx={{ mb: 1 }}>
                   {category}
                 </Typography>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={
+                        toggleAll
+                      }
+                      onChange={() => {
+                        weapons.forEach((weapon) => {
+                          dispatch(
+                            updateWeapons({
+                              key: weapon.key,
+                              value: !toggleAll,
+                            })
+                          );
+                        })
+                      }}
+                    />
+                  }
+                  label={"Not " + category + "?"}
+                />
                 <Grid container spacing={2}>
                   {weapons.map((weapon) => {
                     const value = awkwardGuestsState.weapons[weapon.key];
