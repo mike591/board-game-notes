@@ -20,7 +20,7 @@ const InfoPopup = ({ className, info }) => {
           horizontal: "left",
         }}
       >
-        <Typography sx={{ p: 2 }}>{info}</Typography>
+        <Typography sx={{ p: 2 }} style={{ whiteSpace: 'pre-line' }}>{info}</Typography>
       </Popover>
     </div>
   );
