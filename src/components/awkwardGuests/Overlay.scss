@@ -160,8 +160,18 @@
   }
 
   .billiardRoom.guests {
+    top: 67%;
+    left: 25%;
+  }
+
+  .billiardRoom.maybe {
+    top: 69.5%;
+    left: 25%;
+  }
+
+  .billiardRoom.notSeen {
     top: 72%;
-    left: 20%;
+    left: 25%;
   }
 
   .billiardRoom.notes {
@@ -247,13 +257,23 @@
   }
 
   .vestibule.guests {
-    top: 74%;
-    left: 43%;
+    top: 70%;
+    left: 36.5%;
+  }
+
+  .vestibule.maybe {
+    top: 72.5%;
+    left: 36.5%;
+  }
+
+  .vestibule.notSeen {
+    top: 75%;
+    left: 36.5%;
   }
 
   .vestibule.notes {
-    top: 67%;
-    left: 38%;
+    top: 71%;
+    left: 44%;
   }
 
   .vestibule.count {
@@ -354,13 +374,23 @@
   }
 
   .livingRoom.guests {
+    top: 65%;
+    left: 66%;
+  }
+  
+  .livingRoom.maybe {
+    top: 67.5%;
+    left: 66%;
+  }
+
+  .livingRoom.notSeen {
     top: 70%;
-    left: 64%;
+    left: 66%;
   }
 
   .livingRoom.notes {
     top: 61%;
-    left: 64%;
+    left: 57.5%;
   }
 
   .livingRoom.count {
@@ -441,6 +471,16 @@
   }
 
   .library.guests {
+    top: 65%;
+    left: 80%;
+  }
+
+  .library.maybe {
+    top: 67.5%;
+    left: 80%;
+  }
+
+  .library.notSeen {
     top: 70%;
     left: 80%;
   }

@@ -57,6 +57,8 @@ const initialState = {
       },
       guestCount: 0,
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.studyCrimeScene.key]: {
       notes: "",
@@ -85,6 +87,8 @@ const initialState = {
       },
       guestCount: 0,
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.kitchen.key]: {
       notes: "",
@@ -106,6 +110,8 @@ const initialState = {
       },
       guestCount: 0,
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.shed.key]: {
       notes: "",
@@ -125,7 +131,9 @@ const initialState = {
         [locations.shed.key]: false,
       },
       guestCount: 0,
-      guests: []
+      guests: [],
+      maybe: [],
+      notSeen: []
     },
   },
   suspects: {
@@ -184,7 +192,7 @@ const initialState = {
     how: "",
     hasAccomplice: "",
     accompliceWho: "",
-    accompliceWhy: "",
+    accompliceWhy: "", 
   },
 };
 
@@ -217,28 +225,9 @@ export const awkwardGuestsSlice = createSlice({
     updateLocations: (state, action) => {
       const { locationKey, key, value } = action.payload;
       state.locations[locationKey][key] = value;
-      if (state.locations[locationKey]["maybe"] && state.locations[locationKey]["notSeen"])
-      {
-        switch (key) {
-          case 'guests':
-            state.locations[locationKey]["maybe"] = state.locations[locationKey]["maybe"].filter(a => !state.locations[locationKey]["guests"].includes(a))
-            state.locations[locationKey]["notSeen"] = state.locations[locationKey]["notSeen"].filter(a => !state.locations[locationKey]["guests"].includes(a))
-            break;
-          case 'maybe':
-            state.locations[locationKey]["guests"] = state.locations[locationKey]["guests"].filter(a => !state.locations[locationKey]["maybe"].includes(a))
-            state.locations[locationKey]["notSeen"] = state.locations[locationKey]["notSeen"].filter(a => !state.locations[locationKey]["maybe"].includes(a))
-            break;
-          case 'notSeen':
-            state.locations[locationKey]["guests"] = state.locations[locationKey]["guests"].filter(a => !state.locations[locationKey]["notSeen"].includes(a))
-            state.locations[locationKey]["maybe"] = state.locations[locationKey]["maybe"].filter(a => !state.locations[locationKey]["notSeen"].includes(a))
-            break;
-          default:
-            break;
-        }
-        state.locations[locationKey]["maybe"].sort();
-        state.locations[locationKey]["notSeen"].sort();
-      }
       state.locations[locationKey]["guests"].sort();
+      state.locations[locationKey]["maybe"].sort();
+      state.locations[locationKey]["notSeen"].sort();
       window.localStorage.setItem("state", JSON.stringify(state));
     },
     resetState: (state) => {

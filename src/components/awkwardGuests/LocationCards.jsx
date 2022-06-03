@@ -101,76 +101,72 @@ const LocationCards = () => {
               </FormControl>
             </Grid>
           )}
-          {!location.isStarting && (
-            <Grid item xs={12}>
-              <FormControl fullWidth>
-                <InputLabel>Maybe</InputLabel>
-                <Select
-                  multiple
-                  value={awkwardGuestsState.locations[location.key].maybe}
-                  onChange={(event) => {
-                    dispatch(
-                      updateLocations({
-                        locationKey: location.key,
-                        key: "maybe",
-                        value: event.target.value,
-                      })
-                    );
-                  }}
-                  input={<OutlinedInput label="Maybe" />}
-                  renderValue={(selected) => selected.map((s) => s[0]).join(", ")}
-                >
-                  {Object.values(suspects).map(({ label }) => (
-                    <MenuItem key={label} value={label}>
-                      <Checkbox
-                        checked={
-                          awkwardGuestsState.locations[
-                            location.key
-                          ].maybe.indexOf(label) > -1
-                        }
-                      />
-                      <ListItemText primary={label} />
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-          )}
-          {!location.isStarting && (
-            <Grid item xs={12}>
-              <FormControl fullWidth>
-                <InputLabel>Not Seen</InputLabel>
-                <Select
-                  multiple
-                  value={awkwardGuestsState.locations[location.key].notSeen}
-                  onChange={(event) => {
-                    dispatch(
-                      updateLocations({
-                        locationKey: location.key,
-                        key: "notSeen",
-                        value: event.target.value,
-                      })
-                    );
-                  }}
-                  input={<OutlinedInput label="Not Seen" />}
-                  renderValue={(selected) => selected.map((s) => s[0]).join(", ")}
-                >
-                  {Object.values(suspects).map(({ label }) => (
-                    <MenuItem key={label} value={label}>
-                      <Checkbox
-                        checked={
-                          awkwardGuestsState.locations[
-                            location.key
-                          ].notSeen.indexOf(label) > -1
-                        }
-                      />
-                      <ListItemText primary={label} />
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-          )}
+          <Grid item xs={12}>
+            <FormControl fullWidth>
+              <InputLabel>Maybe</InputLabel>
+              <Select
+                multiple
+                value={awkwardGuestsState.locations[location.key].maybe}
+                 onChange={(event) => {
+                  dispatch(
+                    updateLocations({
+                      locationKey: location.key,
+                      key: "maybe",
+                      value: event.target.value,
+                    })
+                  );
+                }}
+                input={<OutlinedInput label="Maybe" />}
+                renderValue={(selected) => selected.map((s) => s[0]).join(", ")}
+              >
+                {Object.values(suspects).map(({ label }) => (
+                  <MenuItem key={label} value={label}>
+                    <Checkbox
+                      checked={
+                        awkwardGuestsState.locations[
+                          location.key
+                        ].maybe.indexOf(label) > -1
+                      }
+                    />
+                    <ListItemText primary={label} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <FormControl fullWidth>
+              <InputLabel>Not Seen</InputLabel>
+              <Select
+                multiple
+                value={awkwardGuestsState.locations[location.key].notSeen}
+                onChange={(event) => {
+                  dispatch(
+                     updateLocations({
+                      locationKey: location.key,
+                      key: "notSeen",
+                      value: event.target.value,
+                    })
+                  );
+                }}
+                input={<OutlinedInput label="Not Seen" />}
+                renderValue={(selected) => selected.map((s) => s[0]).join(", ")}
+               >
+                {Object.values(suspects).map(({ label }) => (
+                  <MenuItem key={label} value={label}>
+                    <Checkbox
+                      checked={
+                        awkwardGuestsState.locations[
+                         location.key
+                        ].notSeen.indexOf(label) > -1
+                      }
+                    />
+                    <ListItemText primary={label} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
           {Object.entries(
             awkwardGuestsState.locations[location.key].blocked
           ).map(([blockedRoomKey, isBlocked]) => {
