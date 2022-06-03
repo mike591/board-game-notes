@@ -17,7 +17,7 @@ const Overlay = () => {
           value && <div key={key} className={classNames(key, "weapon-line")} />
       )}
       {Object.entries(locationsState).map(
-        ([locationKey, { blocked, guests, guestCount, notes }]) => (
+        ([locationKey, { blocked, guests, maybe, notSeen, guestCount, notes }]) => (
           <Fragment key={locationKey}>
             {guestCount > 0 && (
               <div className={classNames(locationKey, "count")}>
@@ -27,6 +27,16 @@ const Overlay = () => {
             {guests.length > 0 && (
               <div className={classNames(locationKey, "guests")}>
                 {guests.map((g) => g[0]).join(",")}
+              </div>
+            )}
+            {maybe && maybe.length > 0 && (
+              <div className={classNames(locationKey, "maybe")}>
+                {maybe.map((g) => g[0]).join(",")}
+              </div>
+            )}
+            {notSeen && notSeen.length > 0 && (
+              <div className={classNames(locationKey, "notSeen")}>
+                {notSeen.map((g) => g[0]).join(",")}
               </div>
             )}
             {notes.length > 0 && (

@@ -35,8 +35,20 @@
   }
 
   .guests {
-    font-size: 0.75rem;
-    color: purple;
+    font-size: 70%;
+    color: green;
+    position: absolute;
+  }
+
+  .maybe {
+    font-size: 70%;
+    color: orange;
+    position: absolute;
+  }
+
+  .notSeen {
+    font-size: 70%;
+    color: red;
     position: absolute;
   }
 
@@ -45,7 +57,17 @@
   }
 
   .garage.guests {
-    top: 25%;
+    top: 17.5%;
+    left: 14%;
+  }
+
+  .garage.maybe {
+    top: 20%;
+    left: 14%;
+  }
+
+  .garage.notSeen {
+    top: 22.5%;
     left: 14%;
   }
 
@@ -88,7 +110,17 @@
 
   .trophyRoom.guests {
     top: 42%;
-    left: 9%;
+    left: 26%;
+  }
+
+  .trophyRoom.maybe {
+    top: 44.5%;
+    left: 26%;
+  }
+
+  .trophyRoom.notSeen {
+    top: 47%;
+    left: 26%;
   }
 
   .trophyRoom.notes {
@@ -133,7 +165,7 @@
   }
 
   .billiardRoom.notes {
-    top: 72%;
+    top: 70%;
     left: 12%;
   }
 
@@ -159,12 +191,22 @@
 
   .bedroom.guests {
     top: 52%;
-    left: 37%;
+    left: 46%;
+  }
+
+  .bedroom.maybe {
+    top: 54.5%;
+    left: 46%;
+  }
+
+  .bedroom.notSeen {
+    top: 57%;
+    left: 46%;
   }
 
   .bedroom.notes {
-    top: 52%;
-    left: 46%;
+    top: 49%;
+    left: 35.5%;
   }
 
   .bedroom-to-garage.blocked {
@@ -241,7 +283,17 @@
 
   .studyCrimeScene.guests {
     top: 19%;
-    left: 59%;
+    left: 60%;
+  }
+
+  .studyCrimeScene.maybe {
+    top: 21.5%;
+    left: 60%;
+  }
+
+  .studyCrimeScene.notSeen {
+    top: 24%;
+    left: 60%;
   }
 
   .studyCrimeScene.notes {
@@ -254,9 +306,19 @@
     left: 63%;
   }
 
-  .kitchen.notes {
-    top: 42%;
+  .kitchen.maybe {
+    top: 42.5%;
     left: 63%;
+  }
+
+  .kitchen.notSeen {
+    top: 45%;
+    left: 63%;
+  }
+
+  .kitchen.notes {
+    top: 37%;
+    left: 69%;
   }
 
   .kitchen-to-bedroom.blocked {
@@ -328,13 +390,23 @@
   }
 
   .shed.guests {
-    top: 22%;
-    left: 82%;
+    top: 20%;
+    left: 85%;
+  }
+
+  .shed.maybe {
+    top: 22.5%;
+    left: 85%;
+  }
+
+  .shed.notSeen {
+    top: 25%;
+    left: 85%;
   }
 
   .shed.notes {
-    top: 25%;
-    left: 84%;
+    top: 27.5%;
+    left: 90.5%;
   }
 
   .shed-to-studyCrimeScene.blocked {
