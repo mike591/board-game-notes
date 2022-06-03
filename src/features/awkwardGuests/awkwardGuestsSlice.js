@@ -35,6 +35,8 @@ const initialState = {
         [locations.studyCrimeScene.key]: false,
       },
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.trophyRoom.key]: {
       notes: "",
@@ -44,6 +46,8 @@ const initialState = {
         [locations.billiardRoom.key]: false,
       },
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.billiardRoom.key]: {
       notes: "",
@@ -53,11 +57,15 @@ const initialState = {
       },
       guestCount: 0,
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.studyCrimeScene.key]: {
       notes: "",
       blocked: {},
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.bedroom.key]: {
       notes: "",
@@ -67,6 +75,8 @@ const initialState = {
         [locations.studyCrimeScene.key]: false,
       },
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.vestibule.key]: {
       notes: "",
@@ -77,6 +87,8 @@ const initialState = {
       },
       guestCount: 0,
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.kitchen.key]: {
       notes: "",
@@ -86,6 +98,8 @@ const initialState = {
         [locations.livingRoom.key]: false,
       },
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.livingRoom.key]: {
       notes: "",
@@ -96,6 +110,8 @@ const initialState = {
       },
       guestCount: 0,
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.shed.key]: {
       notes: "",
@@ -105,6 +121,8 @@ const initialState = {
         [locations.library.key]: false,
       },
       guests: [],
+      maybe: [],
+      notSeen: []
     },
     [locations.library.key]: {
       notes: "",
@@ -114,6 +132,8 @@ const initialState = {
       },
       guestCount: 0,
       guests: [],
+      maybe: [],
+      notSeen: []
     },
   },
   suspects: {
@@ -172,7 +192,7 @@ const initialState = {
     how: "",
     hasAccomplice: "",
     accompliceWho: "",
-    accompliceWhy: "",
+    accompliceWhy: "", 
   },
 };
 
@@ -205,6 +225,9 @@ export const awkwardGuestsSlice = createSlice({
     updateLocations: (state, action) => {
       const { locationKey, key, value } = action.payload;
       state.locations[locationKey][key] = value;
+      state.locations[locationKey]["guests"].sort();
+      state.locations[locationKey]["maybe"].sort();
+      state.locations[locationKey]["notSeen"].sort();
       window.localStorage.setItem("state", JSON.stringify(state));
     },
     resetState: (state) => {
