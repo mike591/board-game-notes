@@ -190,6 +190,19 @@ const LocationCards = () => {
                               },
                             })
                           );
+                          if (blockedRoomKey !== locations.studyCrimeScene.key) {
+                            dispatch(
+                              updateLocations({
+                                locationKey: blockedRoomKey,
+                                key: "blocked",
+                                value: {
+                                  ...awkwardGuestsState.locations[blockedRoomKey]
+                                    .blocked,
+                                  [location.key]: !isBlocked,
+                                },
+                              })
+                            );
+                          }
                         }}
                       />
                     }
