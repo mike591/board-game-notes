@@ -230,6 +230,11 @@ export const awkwardGuestsSlice = createSlice({
       state.locations[locationKey]["notSeen"].sort();
       window.localStorage.setItem("state", JSON.stringify(state));
     },
+    updateAnswers: (state, action) => {
+      const { key, value } = action.payload;
+      state.solution[key] = value;
+      window.localStorage.setItem("state", JSON.stringify(state));
+    },
     resetState: (state) => {
       window.localStorage.removeItem("state");
       state.weapons = { ...initialState.weapons };
@@ -247,6 +252,7 @@ export const {
   updateSuspects,
   updateSuspectsNotes,
   updateWeapons,
+  updateAnswers,
   updateLocations,
 } = awkwardGuestsSlice.actions;
 
