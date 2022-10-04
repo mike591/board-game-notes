@@ -6,6 +6,7 @@ import LocationCards from "components/awkwardGuests/LocationCards";
 import Overlay from "components/awkwardGuests/Overlay";
 import SuspectCards from "components/awkwardGuests/SuspectCards";
 import WeaponCards from "components/awkwardGuests/WeaponCards";
+import AnswerCards from "components/awkwardGuests/AnswerCards";
 import {
   loadState,
   resetState,
@@ -19,6 +20,7 @@ const App = () => {
   const [openLocationsDrawer, setOpenLocationsDrawer] = useState(false);
   const [openNoteSelectionDrawer, setOpenNoteSelectionDrawer] = useState(false);
   const [stateLoaded, setStateLoaded] = useState(false);
+  const [openAnswersDrawer, setOpenAnswersDrawer] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -81,6 +83,15 @@ const App = () => {
       </Drawer>
       <Drawer
         anchor={"left"}
+        open={openAnswersDrawer}
+        onClose={() => setOpenAnswersDrawer(false)}
+      >
+        <div className="drawer__content">
+          <AnswerCards />
+        </div>
+      </Drawer>
+      <Drawer
+        anchor={"left"}
         open={openNoteSelectionDrawer}
         onClose={() => setOpenNoteSelectionDrawer(false)}
       >
@@ -102,6 +113,12 @@ const App = () => {
             onClick={() => setOpenLocationsDrawer(true)}
           >
             Locations
+          </Button>
+          <Button
+            sx={{ my: 2, p: 4, width: "100%" }}
+            onClick={() => setOpenAnswersDrawer(true)}
+          >
+            Submit Answer
           </Button>
           <Button
             sx={{ my: 2, p: 4, width: "100%" }}
