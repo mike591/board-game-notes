@@ -1,12 +1,21 @@
 import "./App.scss";
 import NotesIcon from "@mui/icons-material/Notes";
-import { Drawer, Button, Fab } from "@mui/material";
+import {
+  Drawer,
+  Button,
+  Fab,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@mui/material";
 import mansionImg from "assets/mansion.png";
+import AnswerCards from "components/awkwardGuests/AnswerCards";
 import LocationCards from "components/awkwardGuests/LocationCards";
 import Overlay from "components/awkwardGuests/Overlay";
 import SuspectCards from "components/awkwardGuests/SuspectCards";
 import WeaponCards from "components/awkwardGuests/WeaponCards";
-import AnswerCards from "components/awkwardGuests/AnswerCards";
 import {
   loadState,
   resetState,
@@ -21,6 +30,7 @@ const App = () => {
   const [openNoteSelectionDrawer, setOpenNoteSelectionDrawer] = useState(false);
   const [stateLoaded, setStateLoaded] = useState(false);
   const [openAnswersDrawer, setOpenAnswersDrawer] = useState(false);
+  const [modalOn, setModalOn] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -54,6 +64,38 @@ const App = () => {
 
   return (
     <div className="App">
+      <Dialog
+        open={modalOn}
+        onClose={() => {
+          setModalOn(false);
+        }}
+      >
+        <DialogTitle id="clear-storage-dialog-title">
+          {"Clear storage?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="clear-storage-dialog-description">
+            This will delete all the notes you have taken.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              setModalOn(false);
+            }}
+          >
+            Disagree
+          </Button>
+          <Button
+            onClick={() => {
+              handleClearStorage();
+              setModalOn(false);
+            }}
+          >
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Drawer
         anchor={"left"}
         open={openSuspectsDrawer}
@@ -122,7 +164,10 @@ const App = () => {
           </Button>
           <Button
             sx={{ my: 2, p: 4, width: "100%" }}
-            onClick={handleClearStorage}
+            onClick={() => {
+              setOpenNoteSelectionDrawer(false);
+              setModalOn(true);
+            }}
           >
             Clear storage
           </Button>
